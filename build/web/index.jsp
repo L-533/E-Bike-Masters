@@ -19,7 +19,8 @@
         <div class="col-lg-4 col-md-6 ">
             <div class="card">
                 <div class="card-body">
-                    <form action="tu_url_de_procesamiento.php" method="POST">
+                    <form  class="form-sign" action="Validar" method="POST">
+                        
                         <div class="form-group text-center">
                             <h3>E-Bike Masters</h3>
                             <img src="img/logo.png" alt="Logo de E-Bike Masters">

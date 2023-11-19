@@ -4,9 +4,12 @@
  */
 package Controlador;
 
+import Modelo.Empleado;
+import Modelo.EmpleadoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author llina
  */
+@WebServlet("/Validar")
 public class Validar extends HttpServlet {
 
     /**
@@ -26,21 +30,13 @@ public class Validar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    EmpleadoDAO edao = new EmpleadoDAO();
+    Empleado em= new Empleado();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Validar</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Validar at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,7 +65,30 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("Método doPost llamado.");
+        
+        String accion=request.getParameter("accion");
+        if(accion.equalsIgnoreCase("Ingresar")){
+            String user=request.getParameter("txtuser");
+            String pass=request.getParameter("txtpass");
+            
+            System.out.println("Usuario: " + user + ", Contraseña: " + pass);
+            em= edao.validar(user, pass);
+            
+            System.out.println("Resultado de la consulta: " + em.getUser());
+            
+            if(em.getUser()!=null){
+                System.out.println("Antes de la redirección");
+                request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
+                System.out.println("Después de la redirección");
+
+            }else{
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            
+        }else{
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
     }
 
     /**
