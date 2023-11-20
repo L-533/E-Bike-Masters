@@ -78,10 +78,9 @@ public class Validar extends HttpServlet {
             System.out.println("Resultado de la consulta: " + em.getUser());
             
             if(em.getUser()!=null){
-                System.out.println("Antes de la redirección");
+                request.setAttribute("usuario", em);
                 request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
-                System.out.println("Después de la redirección");
-
+               
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }

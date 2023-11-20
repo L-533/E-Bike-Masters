@@ -1,0 +1,33 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19/11/2023, 7:36:23 p. m.
+    Author     : llina
+*/
+
+.a_nav{
+    border:none; 
+    margin-left: 10px;
+    
+   
+}
+
+#\#NavBrand{
+    margin-left: 20px;
+}
+
+.dropdown button{
+    margin-right: 20px;
+}
+iframe{
+    height: 100%;
+    width: 100%;
+    border: 1px solid #ccc; /* Puedes ajustar el color y el grosor del borde según tus preferencias */
+  
+}
+
+.divIFrame{
+    height: 100vh;
+}
