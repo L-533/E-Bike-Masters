@@ -16,48 +16,53 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" id="#NavBrand" href="#">E-Bike Masters</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" id="#NavBrand">E-Bike Masters</a>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="btn btn-outline-light a_nav"  href="Controlador?accion=Producto" target="myFrame" >Producto</a>
-                </li>
-                <li class="nav-item">
-                  <a class="btn btn-outline-light a_nav" href="Controlador?accion=Empleado" target="myFrame">Empleado</a>
-                </li>
-                <li class="nav-item">
-                  <a class="btn btn-outline-light a_nav" href="Controlador?accion=Cliente" target="myFrame">Clientes</a>
-                </li>
-                <li class="nav-item">
-                  <a class="btn btn-outline-light a_nav" href="Controlador?accion=NuevaVenta" target="myFrame">Nueva Venta</a>
-                </li>
-              </ul>
+                <ul class="navbar-nav nav-active">
+                  <li class="nav-item">
+                    <a class="btn btn-outline-light" id="navProducto" href="Controlador?accion=Producto" target="myFrame">Producto</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-light" id="navEmpleado" href="Controlador?accion=Empleado" target="myFrame">Empleado</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?accion=Cliente" target="myFrame">Clientes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?accion=NuevaVenta" target="myFrame">Nueva Venta</a>
+                  </li>                
+                </ul>
+                
+                               
             </div>
+            
 
-             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    ${usuario.getNom()}
-              </button>
-              <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
-                    <img src="img/perfil.png" alt="perfil" width="60px" height="60px"/>
-                    <li><a class="dropdown-item" href="#">${usuario.getUser()}</a></li>
-                    <li><a class="dropdown-item" href="#">usuario@gmail.com</a></li>
+            <div class="dropdown-center">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      ${usuario.getNom()}
+                </button>
+                <ul class="dropdown-menu text-center " aria-labelledby="dropdownMenuButton1">
+                    
+                    <li>
+                        <img src="img/perfil.png" alt="perfil" width="60px" height="60px"/>
+
+                    </li>                    
+                    <li>${usuario.getUser()}</li>
+                    <li>usuario@gmail.com</li>
                     <div class="dropdown-divider"></div>
                     <form action="Validar" method="POST">
                         <button name="accion" value="Salir" class="dropdown-item" href="#">Salir</button>
                     </form>
 
-              </ul>
+             </ul>
 
-            </div>
+            </div>   
+           
         </nav>
-        
+           
         <div class="m-4 divIFrame">
-            <iframe name="myFrame" >
+            <iframe name="myFrame" src="Controlador?accion=NuevaVenta">
                 
             </iframe>          
            
@@ -66,8 +71,27 @@
   
 
         
-
+                        
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              // Obtener todos los elementos de la barra de navegación
+              var navItems = document.querySelectorAll(".nav-active a");
+
+              // Agregar un controlador de eventos clic a cada elemento
+              navItems.forEach(function(item) {
+                item.addEventListener("click", function() {
+                  // Eliminar la clase activa de todos los elementos
+                  navItems.forEach(function(innerItem) {
+                    innerItem.classList.remove("active");
+                  });
+
+                  // Agregar la clase activa al elemento clicado
+                  item.classList.add("active");
+                });
+              });
+            });
+        </script>
     </body>
 </html>

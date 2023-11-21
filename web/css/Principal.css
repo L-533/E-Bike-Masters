@@ -7,20 +7,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : llina
 */
 
-.a_nav{
+nav{
+    height: 8vh;
+}
+.nav-item .btn{
     border:none; 
-    margin-left: 10px;
+    margin-left: 20px;   
+/*    height: 10vh;
+    border-radius: 0px;
+    text-align: center;*/
     
-   
+ 
 }
 
 #\#NavBrand{
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
-.dropdown button{
-    margin-right: 20px;
+.dropdown-center{
+    margin-right: 30px;
 }
+.dropdown-center button{
+    border:none;
+    
+}
+
+
+/*.dropdown-center .btn,.dropdown-center .btn:hover,.dropdown-center .btn:active{
+   
+    color: white;
+    margin-right: 30px;
+}*/
+.dropdown-center li{
+    margin-top: 5px;
+}
+
+.dropdown-center .dropdown-menu {
+    transform: translateX(-50%);
+    left: 50% !important;
+}
+
+
+
+
 iframe{
     height: 100%;
     width: 100%;
@@ -31,3 +60,5 @@ iframe{
 .divIFrame{
     height: 100vh;
 }
+
+
