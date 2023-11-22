@@ -10,9 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>JSP Page</title>
+        <title>E-Bike Masters</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link href="css/Principal.css" rel="stylesheet" type="text/css"/>
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,16 +21,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav nav-active">
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navProducto" href="Controlador?accion=Producto" target="myFrame">Producto</a>
+                    <a class="btn btn-outline-light" id="navProducto" href="Controlador?menu=Producto" target="myFrame">Producto</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navEmpleado" href="Controlador?accion=Empleado" target="myFrame">Empleado</a>
+                    <a class="btn btn-outline-light" id="navEmpleado" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">Empleado</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?accion=Cliente" target="myFrame">Clientes</a>
+                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?menu=Cliente" target="myFrame">Clientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?accion=NuevaVenta" target="myFrame">Nueva Venta</a>
+                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?menu=NuevaVenta" target="myFrame">Nueva Venta</a>
                   </li>                
                 </ul>
                 
@@ -62,7 +62,7 @@
         </nav>
            
         <div class="m-4 divIFrame">
-            <iframe name="myFrame" src="Controlador?accion=NuevaVenta">
+            <iframe name="myFrame" src="Controlador?menu=NuevaVenta">
                 
             </iframe>          
            

@@ -7,6 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : llina
 */
 
+/*Principal*/
 nav{
     height: 8vh;
 }
@@ -32,12 +33,6 @@ nav{
     
 }
 
-
-/*.dropdown-center .btn,.dropdown-center .btn:hover,.dropdown-center .btn:active{
-   
-    color: white;
-    margin-right: 30px;
-}*/
 .dropdown-center li{
     margin-top: 5px;
 }
@@ -48,13 +43,10 @@ nav{
 }
 
 
-
-
 iframe{
     height: 100%;
     width: 100%;
-    border: 1px solid #ccc; /* Puedes ajustar el color y el grosor del borde según tus preferencias */
-  
+    
 }
 
 .divIFrame{
@@ -62,3 +54,19 @@ iframe{
 }
 
 
+/*Empleado*/
+
+
+
+.card-body div{
+   
+    margin-top: 15px;
+}
+
+.card-body input{
+   
+/*    margin-top: 10px;*/
+}
+#div_table{
+    margin-left: 20px;
+}

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author llina
  */
 @WebServlet("/Validar")
-public class Validar extends HttpServlet {
+public class ControladorValidar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -79,7 +79,7 @@ public class Validar extends HttpServlet {
             
             if(em.getUser()!=null){
                 request.setAttribute("usuario", em);
-                request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
+                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
                
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
