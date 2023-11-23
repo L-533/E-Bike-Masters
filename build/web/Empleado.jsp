@@ -23,7 +23,7 @@
         <div class="d-flex">
             <div class="card col-sm-4 ">
             <div class="card-body">
-                <form>
+                <form action="Controlador?menu=Empleado" method="POST">
                     <div class="form-group">
                         <labe>Dni</labe>
                         <input type="text" name="txtDni" class="form-control">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <labe>Usuario</labe>
-                        <input type="text" name="txtUsuario" class="form-control">
+                        <input type="text" name="txtUser" class="form-control">
                     </div>
                     
                     <div>

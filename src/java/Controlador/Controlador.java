@@ -7,7 +7,6 @@ package Controlador;
 import Modelo.Empleado;
 import Modelo.EmpleadoDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +38,21 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("empleados",lista);
                     break;
                 case "Agregar":
+                    String dni=request.getParameter("txtDni");
+                    String nom=request.getParameter("txtNombres");
+                    String tel=request.getParameter("txtTel");
+                    String estado=request.getParameter("txtEstado");
+                    String user=request.getParameter("txtUser");
                     
+                    em.setDni(dni);
+                    em.setNom(nom);
+                    em.setTel(tel);
+                    em.setEstado(estado);
+                    em.setUser(user);                    
+                    
+                    edao.agregar(em);
+                    
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
                     break;
                 case "Editar":
                     
@@ -62,30 +75,7 @@ public class Controlador extends HttpServlet {
         if(menu.equals("NuevaVenta")){
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }
-//        switch (accion) {
-//            case "Principal":
-//                System.out.println("esto es Principal...");
-//                request.getRequestDispatcher("Principal.jsp").forward(request, response);
-//                break;
-//            case "Producto":
-//                System.out.println("esto es Principal...");
-//                request.getRequestDispatcher("Producto.jsp").forward(request, response);
-//                break;
-//            case "Cliente":
-//                System.out.println("esto es Principal...");
-//                request.getRequestDispatcher("Clientes.jsp").forward(request, response);
-//                break;
-//            case "Empleado":
-//                System.out.println("esto es Principal...");
-//                request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-//                break;
-//            case "NuevaVenta":
-//                System.out.println("esto es Principal...");
-//                request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
-//                break;
-//            default:
-//                throw new AssertionError();
-//        }
+
     }
 
     @Override

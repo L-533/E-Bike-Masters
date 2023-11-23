@@ -11,21 +11,14 @@ import java.sql.DriverManager;
  *
  * @author llina
  */
+
+// Implementación con patron Singleton
 public class Conexion {
     private static Conexion instance;
     Connection con;
     String url= "jdbc:mysql://localhost:3306/db_ventas";               
     String user="root";
-    String password="";
-    public Connection Conexion(){
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con= DriverManager.getConnection(url,user,password);
-        } catch(Exception e){
-            
-        }
-        return con;
-    }
+    String password="";    
     
      // Constructor privado para evitar la creación de instancias directas
     private Conexion() {

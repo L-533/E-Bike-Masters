@@ -24,12 +24,11 @@ public class EmpleadoDAO {
     
     public Empleado validar(String user, String dni){
         Empleado em=new Empleado();
-        String sql= "SELECT * FROM empleado WHERE User = ? AND Dni = ?";
-        con = cn.Conexion();
+        String sql= "SELECT * FROM empleado WHERE User = ? AND Dni = ?";        
         System.out.println("Conexión a la base de datos establecida: " + (con != null));
 
         try{
-            con=cn.Conexion();
+            
             ps=con.prepareStatement(sql);
             ps.setString(1, user);
             ps.setString(2, dni);
@@ -51,9 +50,7 @@ public class EmpleadoDAO {
     public List listar(){
         String sql="select * from empleado";
         List<Empleado>lista= new ArrayList<>();
-        try{
-            Conexion cn = Conexion.getInstance();  // Obtener la instancia Singleton
-            Connection con = cn.getConexion();  // Obtener la conexión desde la instancia Singleton
+        try{           
             ps=con.prepareStatement(sql);
             rs=ps.executeQuery();
             while(rs.next()){
@@ -74,21 +71,26 @@ public class EmpleadoDAO {
     }
     
     public int agregar(Empleado em){
-        String sql="insert into empleado(Dni, Nombres, Telefono, Estado, User) values(?,?,?,?,?) ";
+        String sql="INSERT INTO empleado (Dni, Nombres, Telefono, Estado, User) VALUES (?, ?, ?, ?, ?)";
         
-        try{
-            Conexion cn = Conexion.getInstance();  // Obtener la instancia Singleton
-            Connection con = cn.getConexion();  // Obtener la conexión desde la instancia Singleton
-            ps=con.prepareStatement(sql);
+        try{            
+            if (con != null) {
+            System.out.println("Conexión establecida correctamente");
+            System.out.println("registrando usuario:" + em.getDni()+ em.getNom() + em.getTel()+ em.getEstado()+em.getUser());
+            con.setAutoCommit(false); // Habilitar el modo de autocommit
+            ps = con.prepareStatement(sql);
             ps.setString(1, em.getDni());
             ps.setString(2, em.getNom());
             ps.setString(3, em.getTel());
             ps.setString(4, em.getEstado());
             ps.setString(5, em.getUser());
             ps.executeUpdate();
-            
-        } catch(Exception e){
-            
+            con.commit(); // Realizar el commit de la transacción
+                        
+            } else {
+                System.out.println("Error: No se pudo establecer la conexión");
+            } 
+        } catch(Exception e){            
             
         }
         return r;
@@ -99,9 +101,7 @@ public class EmpleadoDAO {
         Empleado em= new Empleado();
         String sql="select * from empleado where IdEmpleado"+id;
         
-        try{
-            Conexion cn = Conexion.getInstance();  // Obtener la instancia Singleton
-            Connection con = cn.getConexion();  // Obtener la conexión desde la instancia Singleton
+        try{            
             ps=con.prepareStatement(sql);
             rs=ps.executeQuery();
             while(rs.next()){               
@@ -120,9 +120,7 @@ public class EmpleadoDAO {
     public int actualizar(Empleado em){
         String sql="update empleado set Dni=?, Nombres=?, Telefono=?, Estado=?, User=? where IdEmpleado=?";
         
-        try{
-            Conexion cn = Conexion.getInstance();  // Obtener la instancia Singleton
-            Connection con = cn.getConexion();  // Obtener la conexión desde la instancia Singleton
+        try{            
             ps=con.prepareStatement(sql);
             ps.setString(1, em.getDni());
             ps.setString(2, em.getNom());
@@ -141,9 +139,7 @@ public class EmpleadoDAO {
     }
     public void delete(int id){
         String sql="delete from empleado where IdEmpleado="+id;
-        try{
-            Conexion cn = Conexion.getInstance();  // Obtener la instancia Singleton
-            Connection con = cn.getConexion();  // Obtener la conexión desde la instancia Singleton
+        try{            
             ps=con.prepareStatement(sql);
             ps.executeUpdate();
         } catch(Exception e){
