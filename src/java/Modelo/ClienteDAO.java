@@ -15,52 +15,32 @@ import java.util.List;
  *
  * @author llina
  */
-public class EmpleadoDAO {
+public class ClienteDAO {
     Conexion cn = Conexion.getInstance();  // Obtener la instancia Singleton
     Connection con = cn.getConexion();  // Obtener la conexión desde la instancia Singleton
     PreparedStatement ps;
     ResultSet rs;
     int r;
     
-    public Empleado validar(String user, String dni){
-        Empleado em=new Empleado();
-        String sql= "SELECT * FROM empleado WHERE User = ? AND Dni = ?";        
-        System.out.println("Conexión a la base de datos establecida: " + (con != null));
-
-        try{            
-            ps=con.prepareStatement(sql);
-            ps.setString(1, user);
-            ps.setString(2, dni);
-            rs=ps.executeQuery();
-            while (rs.next()){
-                em.setId(rs.getInt("IdEmpleado"));
-                em.setUser(rs.getString("User"));
-                em.setDni(rs.getString("Dni"));
-                em.setNom(rs.getString("Nombres"));
-            }
-        }catch (Exception e){
-            
-        }
-        return em;
-    }
+    
     
     //Operaciones CRUD
     
     public List listar(){
-        String sql="select * from empleado";
-        List<Empleado>lista= new ArrayList<>();
+        String sql="select * from cliente";
+        List<Cliente>lista= new ArrayList<>();
         try{           
             ps=con.prepareStatement(sql);
             rs=ps.executeQuery();
             while(rs.next()){
-                Empleado em = new Empleado();
-                em.setId(rs.getInt(1));
-                em.setDni(rs.getString(2));
-                em.setNom(rs.getString(3));
-                em.setTel(rs.getString(4));
-                em.setEstado(rs.getString(5));
-                em.setUser(rs.getString(6));
-                lista.add(em);
+                Cliente cl = new Cliente();
+                cl.setId(rs.getInt(1));
+                cl.setCedula(rs.getString(2));
+                cl.setNom(rs.getString(3));
+                cl.setDireccion(rs.getString(4));
+                cl.setTel(rs.getString(5));
+
+                lista.add(cl);
             }
         } catch(Exception e){
             
@@ -69,20 +49,20 @@ public class EmpleadoDAO {
         
     }
     
-    public int agregar(Empleado em){
-        String sql="INSERT INTO empleado (Dni, Nombres, Telefono, Estado, User) VALUES (?, ?, ?, ?, ?)";
+    public int agregar(Cliente cl){
+        String sql="INSERT INTO cliente (Cedula, Nombres, Direccion, Telefono) VALUES (?, ?, ?, ?)";
         
         try{            
             if (con != null) {
             System.out.println("Conexión establecida correctamente");
-            System.out.println("registrando usuario:" + em.getDni()+ em.getNom() + em.getTel()+ em.getEstado()+em.getUser());
+            System.out.println("registrando usuario:" + cl.getCedula()+ cl.getNom() + cl.getDireccion()+cl.getTel());
             con.setAutoCommit(false); // Habilitar el modo de autocommit
             ps = con.prepareStatement(sql);
-            ps.setString(1, em.getDni());
-            ps.setString(2, em.getNom());
-            ps.setString(3, em.getTel());
-            ps.setString(4, em.getEstado());
-            ps.setString(5, em.getUser());
+            ps.setString(1, cl.getCedula());
+            ps.setString(2, cl.getNom());
+            ps.setString(3, cl.getDireccion());
+            ps.setString(4, cl.getTel());
+            
             ps.executeUpdate();
             con.commit(); // Realizar el commit de la transacción
                         
@@ -96,9 +76,9 @@ public class EmpleadoDAO {
        
     }
     
-    public Empleado listarId(int id){
-        Empleado em= new Empleado();
-        String sql="SELECT * FROM empleado WHERE IdEmpleado = ?";
+    public Cliente listarId(int id){
+        Cliente cl= new Cliente();
+        String sql="SELECT * FROM cliente WHERE IdCliente = ?";
         
         try{
             System.out.println("ListarId ejecutandose con id="+id);
@@ -109,30 +89,29 @@ public class EmpleadoDAO {
             con.commit(); // Realizar el commit de la transacción
 
             while (rs.next()){               
-                em.setDni(rs.getString(2));
-                em.setNom(rs.getString(3));
-                em.setTel(rs.getString(4));
-                em.setEstado(rs.getString(5));
-                em.setUser(rs.getString(6));
+                cl.setCedula(rs.getString(2));
+                cl.setNom(rs.getString(3));
+                cl.setDireccion(rs.getString(4));
+                cl.setTel(rs.getString(5));                
+                
             }
         } catch(Exception e){
             
         }
         
-        return em;
+        return cl;
     }
-    public int actualizar(Empleado em){
-        String sql="update empleado set Dni=?, Nombres=?, Telefono=?, Estado=?, User=? where IdEmpleado=?";
+    public int actualizar(Cliente cl){
+        String sql="update cliente set Cedula=?, Nombres=?, Direccion=?, Telefono=? where IdCliente=?";
         
         try{
             con.setAutoCommit(false); // Habilitar el modo de autocommit            
             ps=con.prepareStatement(sql);
-            ps.setString(1, em.getDni());
-            ps.setString(2, em.getNom());
-            ps.setString(3, em.getTel());
-            ps.setString(4, em.getEstado());
-            ps.setString(5, em.getUser());
-            ps.setInt(6, em.getId());
+            ps.setString(1, cl.getCedula());
+            ps.setString(2, cl.getNom());
+            ps.setString(3, cl.getDireccion());
+            ps.setString(4, cl.getTel());
+            ps.setInt(5, cl.getId());
             ps.executeUpdate();
             con.commit(); // Realizar el commit de la transacción
             
@@ -144,7 +123,7 @@ public class EmpleadoDAO {
         
     }
     public void delete(int id){
-        String sql="delete from empleado where IdEmpleado="+id;
+        String sql="delete from cliente where IdCliente="+id;
         try{
             con.setAutoCommit(false); // Habilitar el modo de autocommit            
             ps=con.prepareStatement(sql);
@@ -154,5 +133,4 @@ public class EmpleadoDAO {
             
         }
     }
-   
 }

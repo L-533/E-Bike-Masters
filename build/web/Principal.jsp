@@ -27,7 +27,7 @@
                     <a class="btn btn-outline-light" id="navEmpleado" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">Empleado</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?menu=Cliente" target="myFrame">Clientes</a>
+                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Clientes</a>
                   </li>
                   <li class="nav-item">
                     <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?menu=NuevaVenta" target="myFrame">Nueva Venta</a>

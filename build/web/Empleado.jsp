@@ -10,14 +10,13 @@
 <html>
     <head>
       <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-      <script src="https://kit.fontawesome.com/53b1bfb7db.js" crossorigin="anonymous"></script>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-      <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/53b1bfb7db.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="" rel="stylesheet" type="text/css"/>
 
-      <title>Movie Reviews | Home Page</title>
+      <title>Empleado</title>
     </head>
     <body>
         <div class="d-flex">
@@ -26,27 +25,28 @@
                 <form action="Controlador?menu=Empleado" method="POST">
                     <div class="form-group">
                         <labe>Dni</labe>
-                        <input type="text" name="txtDni" class="form-control">
+                        <input type="text" value="${empleado.getDni()}" name="txtDni" class="form-control">
                     </div>
                     <div class="form-group">
                         <labe>Nombres</labe>
-                        <input type="text" name="txtNombres" class="form-control">
+                        <input type="text" value="${empleado.getNom()}" name="txtNombres" class="form-control">
                     </div>
                     <div class="form-group">
                         <labe>Telefono</labe>
-                        <input type="text" name="txtTel" class="form-control">
+                        <input type="text" value="${empleado.getTel()}" name="txtTel" class="form-control">
                     </div>
                     <div class="form-group">
                         <labe>Estado</labe>
-                        <input type="text" name="txtEstado" class="form-control">
+                        <input type="text" value="${empleado.getEstado()}" name="txtEstado" class="form-control">
                     </div>
                     <div class="form-group">
                         <labe>Usuario</labe>
-                        <input type="text" name="txtUser" class="form-control">
+                        <input type="text" value="${empleado.getUser()}" name="txtUser" class="form-control">
                     </div>
                     
                     <div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
+                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
                     </div>
                     
                 </form>
@@ -55,6 +55,12 @@
         </div>
             
         <div class="col-sm-8" id="div_table">
+             <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar Empleado">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                </div>
+            </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -77,13 +83,31 @@
                             <td>${em.getEstado()}</td>
                             <td>${em.getUser()}</td>
                             <td>
-                                <a>Editar</a>
-                                <a>Delete</a>
+                                <a class="btn btn-warning" href="Controlador?menu=Empleado&accion=Editar&id=${em.getId()}">Editar</a>
+                                <a class="btn btn-danger" href="Controlador?menu=Empleado&accion=Delete&id=${em.getId()}">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
+            <!-- Paginación -->
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <span class="page-link">Anterior</span>
+                </li>
+                <li class="page-item active">
+                    <span class="page-link">1</span>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                </li>
+            </ul>
         </div>
         </div>
 
