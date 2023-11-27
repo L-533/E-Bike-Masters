@@ -90,7 +90,8 @@ public class ProductoDAO {
             rs = ps.executeQuery();
             con.commit(); // Realizar el commit de la transacción
 
-            while (rs.next()){               
+            while (rs.next()){   
+                pr.setId(rs.getInt(1));
                 pr.setNom(rs.getString(2));
                 pr.setPrecio(rs.getDouble(3));
                 pr.setStock(rs.getInt(4));

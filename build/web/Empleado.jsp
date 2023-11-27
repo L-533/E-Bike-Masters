@@ -25,28 +25,28 @@
                 <form action="Controlador?menu=Empleado" method="POST">
                     <div class="form-group">
                         <labe>Dni</labe>
-                        <input type="text" value="${empleado.getDni()}" name="txtDni" class="form-control">
+                        <input type="text" value="${empleado.getDni()}" name="txtDni" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <labe>Nombres</labe>
-                        <input type="text" value="${empleado.getNom()}" name="txtNombres" class="form-control">
+                        <input type="text" value="${empleado.getNom()}" name="txtNombres" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <labe>Telefono</labe>
-                        <input type="text" value="${empleado.getTel()}" name="txtTel" class="form-control">
+                        <input type="text" value="${empleado.getTel()}" name="txtTel" class="form-control" pattern="[0-9]+" title="Ingrese solo números" required >
                     </div>
                     <div class="form-group">
                         <labe>Estado</labe>
-                        <input type="text" value="${empleado.getEstado()}" name="txtEstado" class="form-control">
+                        <input type="text" value="${empleado.getEstado()}" name="txtEstado" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <labe>Usuario</labe>
-                        <input type="text" value="${empleado.getUser()}" name="txtUser" class="form-control">
+                        <input type="text" value="${empleado.getUser()}" name="txtUser" class="form-control" required>
                     </div>
                     
                     <div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
-                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success" style="margin-left: 10px">
                     </div>
                     
                 </form>
@@ -84,7 +84,7 @@
                             <td>${em.getUser()}</td>
                             <td>
                                 <a class="btn btn-warning" href="Controlador?menu=Empleado&accion=Editar&id=${em.getId()}">Editar</a>
-                                <a class="btn btn-danger" href="Controlador?menu=Empleado&accion=Delete&id=${em.getId()}">Delete</a>
+                                <a class="btn btn-danger" href="Controlador?menu=Empleado&accion=Delete&id=${em.getId()}" style="margin-left: 10px">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

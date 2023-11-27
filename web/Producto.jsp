@@ -24,25 +24,25 @@
                     <form action="Controlador?menu=Producto" method="POST">
                         <div class="form-group">
                             <labe>Nombre</labe>
-                            <input type="text" value="${producto.getNom()}" name="txtNombre" class="form-control">
+                            <input type="text" value="${producto.getNom()}" name="txtNombre" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <labe>Precio</labe>
-                            <input type="text" value="${producto.getPrecio()}" name="txtPrecio" class="form-control" placeholder="$/.0.00">
+                            <input type="text" value="${producto.getPrecio()}" name="txtPrecio" class="form-control" placeholder="$/.0.00" pattern="[0-9]+(\.[0-9]+)?" title="Ingrese solo números" required >
                         </div>
                         <div class="form-group">
                             <labe>Stock</labe>
-                            <input type="number" value="${producto.getStock()}" name="txtStock" class="form-control">
+                            <input type="number" value="${producto.getStock()}" name="txtStock" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <labe>Estado</labe>
-                            <input type="text" value="${producto.getEstado()}" name="txtEstado" class="form-control">
+                            <input type="text" value="${producto.getEstado()}" name="txtEstado" class="form-control" required>
                         </div>
 
 
                         <div>
                             <input type="submit" name="accion" value="Agregar" class="btn btn-info">
-                             <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+                             <input type="submit" name="accion" value="Actualizar" class="btn btn-success" style="margin-left: 10px">
                         </div>
 
                     </form>
@@ -81,7 +81,7 @@
 
                                 <td>
                                     <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pr.getId()}">Editar</a>
-                                    <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Delete&id=${pr.getId()}">Delete</a>
+                                    <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Delete&id=${pr.getId()}" style="margin-left: 10px">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>

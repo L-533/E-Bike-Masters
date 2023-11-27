@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,19 +22,19 @@
         <div class="d-flex">
             <div class="col-sm-5">
                 <div class="card">
-                    <form action="Controlador" method="POST">
+                    <form action="Controlador?menu=NuevaVenta" method="POST">
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Datos del Cliente</label>
                             </div>
                             <div class="form-group d-flex mb-4">
                                 <div class="col-sm-6 d-flex">
-                                    <input type="text" name="Codigocliente" class="form-control" placeholder="Codigo">
-                                    <input type="submit" name="accion" value="Buscar" class="btn btn-outline-info ">
+                                    <input type="text" name="CodigoCliente" value="${clienteV.getCedula()}" class="form-control" placeholder="Codigo">
+                                    <input type="submit" name="accion" value="BuscarCliente" class="btn btn-outline-info ">
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <input type="text" name="nombrescliente"  class="form-control">
+                                    <input type="text" name="nombrescliente" value="${clienteV.getNom()}" class="form-control" placeholder="Datos Cliente">
                                 </div>                     
 
                             </div>
@@ -43,29 +44,31 @@
                             </div>
                             <div class="form-group d-flex">
                                 <div class="col-sm-6 d-flex">
-                                    <input type="text" name="Codigoproducto" class="form-control" placeholder="Codigo">
-                                    <input type="submit" name="accion" value="Buscar" class="btn btn-outline-info ">
+                                    <input type="text" name="CodigoProducto" value="${producto.getId()}"  class="form-control" placeholder="Codigo" pattern="[0-9]+" title="Ingrese solo números" required >
+                                    <input type="submit" name="accion" value="BuscarProducto" class="btn btn-outline-info ">
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <input type="text" name="nombrescliente"  class="form-control" placeholder="Datos Producto">
+                                    <input type="text" name="NombreProducto" value="${producto.getNom()}" class="form-control" placeholder="Datos Producto">
                                 </div> 
                             </div>
                             <div class="form-group d-flex">
                                 <div class="col-sm-6 d-flex">
-                                    <input type="text" name="precio" class="form-control" placeholder="$/.0.00">
+                                    <input type="text" name="precio" value="${producto.getPrecio()}" class="form-control" placeholder="$/.0.00">
 
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <input type="number" name="cantidad"  class="form-control">
+                                    <input type="number" name="cantidad" value="1" class="form-control">
                                 </div>  
                                 <div class="col-sm-3">
-                                    <input type="text" name="stock"  class="form-control" placeholder="Stock">
+                                    <input type="text" name="stock" value="${producto.getStock()}"  class="form-control" placeholder="Stock">
                                 </div> 
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="accion" value="Agregar" class="btn btn-outline-info">
+                                <div class="col-sm">
+                                    <input type="submit" name="accion" value="Agregar" class="btn btn-outline-info">
+                                </div>
                             </div>
                         </div>
                     </form>  
@@ -92,24 +95,32 @@
                                 </tr>
                             </thead> 
                             <tbody>
+                                <c:forEach var="list" items="${lista}">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>${list.getItem()}</td>
+                                    <td>${list.getIdProducto()}</td>
+                                    <td>${list.getDescripcionP()}</td>
+                                    <td>${list.getPrecio()}</td>
+                                    <td>${list.getCantidad()}</td>
+                                    <td>${list.getSubtotal()}</td>
+                                    <td class="d-flex">
+                                        <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pr.getId()}">Editar</a>
+                                        <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Delete&id=${pr.getId()}" style="margin-left: 10px">Delete</a>
+                                    </td>
                                 </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <div>
+                    <div class="card-footer d-flex">
+                        <div class="col-sm-6">
                             <input type="submit" name="accion" value="Generar Venta" class="btn btn-success">
-                            <input type="submit" name="accion" value="Cancelar" class="btn btn-danger">
+                            <input type="submit" name="accion" value="Cancelar" class="btn btn-danger" style="margin-left: 10px">
                         </div>
-                        
+                        <div class="d-flex col-sm-4 ml-auto">
+                            <label>Total: </label>
+                            <input type="text" name="txtTotal" value="${totalpagar}" class="form-control">                            
+                        </div>
                     </div>
                 </div>                
             </div>

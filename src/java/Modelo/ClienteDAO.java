@@ -23,7 +23,26 @@ public class ClienteDAO {
     int r;
     
     
-    
+    public Cliente buscar(String cedula){
+        Cliente cl = new Cliente();
+        String sql="Select * from cliente where Cedula="+cedula;
+        try{
+            con.setAutoCommit(false); // Habilitar el modo de autocommit            
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            con.commit(); // Realizar el commit de la transacción
+            while(rs.next()){
+                cl.setId(rs.getInt(1));
+                cl.setCedula(rs.getString(2));
+                cl.setNom(rs.getString(3));
+                cl.setDireccion(rs.getString(4));
+                cl.setTel(rs.getString(5));
+            }
+        }catch(Exception e){
+            
+        }
+        return cl;
+    }
     //Operaciones CRUD
     
     public List listar(){

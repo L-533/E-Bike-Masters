@@ -30,7 +30,7 @@
                     <a class="btn btn-outline-light" id="navCliente" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Clientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?menu=NuevaVenta" target="myFrame">Nueva Venta</a>
+                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?menu=NuevaVenta&accion=" target="myFrame">Nueva Venta</a>
                   </li>                
                 </ul>
                 

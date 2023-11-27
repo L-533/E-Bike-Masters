@@ -10,7 +10,9 @@ import Modelo.Empleado;
 import Modelo.EmpleadoDAO;
 import Modelo.Producto;
 import Modelo.ProductoDAO;
+import Modelo.Venta;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,12 +35,25 @@ public class Controlador extends HttpServlet {
     Producto pr = new Producto();
     ProductoDAO prdao = new ProductoDAO();
     
+    Venta v =  new Venta();
+    List<Venta> lista = new ArrayList();
+    int item;
+    int cod;
+    String descripcion;
+    double precio;
+    int cantidad;
+    double subtotal;
+    double totalPagar;
+    
     
     int ide;  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
+        if (accion == null) {
+            accion = "ValorPredeterminado"; 
+        }
         System.out.println("Valor de accion: " + accion);
         if(menu.equals("Principal")){
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
@@ -217,6 +232,50 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
         }
         if(menu.equals("NuevaVenta")){
+            switch(accion){
+                case "BuscarCliente":
+                    String cedula=request.getParameter("CodigoCliente");
+                    System.out.println("Buscar cliente con cedula: "+cedula);    
+                    cl.setCedula(cedula);
+                    cl = cldao.buscar(cedula);
+                    System.out.println("Buscar cliente con nombre: "+cl); 
+                    request.setAttribute("clienteV", cl);
+                    break;              
+                case "BuscarProducto":
+                    int id=Integer.parseInt(request.getParameter("CodigoProducto"));
+                    
+                    pr = prdao.listarId(id);                    
+                    request.setAttribute("producto", pr);
+                    request.setAttribute("lista", lista);
+                    break;  
+                case "Agregar":
+                    totalPagar=0.0;
+                    item = item+1;
+                    cod= pr.getId();
+                    descripcion= request.getParameter("NombreProducto"); 
+                    precio = Double.parseDouble(request.getParameter("precio"));
+                    cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                    subtotal = precio*cantidad;
+                    v= new Venta();
+                    v.setItem(item);
+                    v.setIdProducto(cod);
+                    v.setDescripcionP(descripcion);
+                    v.setPrecio(precio);
+                    v.setCantidad(cantidad);
+                    v.setSubtotal(subtotal);
+                    
+                    lista.add(v);
+                    for(int i=0; i<lista.size();i++){
+                        totalPagar= totalPagar + lista.get(i).getSubtotal();
+                    }
+                    
+                    request.setAttribute("totalpagar", totalPagar);
+                    request.setAttribute("lista", lista);
+                    break;
+                default:
+                   
+                    
+            }            
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }
 

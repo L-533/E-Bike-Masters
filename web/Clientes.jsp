@@ -24,11 +24,11 @@
                     <form action="Controlador?menu=Cliente" method="POST">
                         <div class="form-group">
                             <labe>Cedula</labe>
-                            <input type="text" value="${cliente.getCedula()}" name="txtCedula" class="form-control">
+                            <input type="text" value="${cliente.getCedula()}" name="txtCedula" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <labe>Nombres</labe>
-                            <input type="text" value="${cliente.getNom()}" name="txtNombres" class="form-control">
+                            <input type="text" value="${cliente.getNom()}" name="txtNombres" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <labe>Direccion</labe>
@@ -36,13 +36,13 @@
                         </div>
                         <div class="form-group">
                             <labe>Telefono</labe>
-                            <input type="text" value="${cliente.getTel()}" name="txtTel" class="form-control">
+                            <input type="text" value="${cliente.getTel()}" name="txtTel" class="form-control" pattern="[0-9]+" title="Ingrese solo números" required >
                         </div>
 
 
                         <div>
                             <input type="submit" name="accion" value="Agregar" class="btn btn-info">
-                             <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+                             <input type="submit" name="accion" value="Actualizar" class="btn btn-success" style="margin-left: 10px">
                         </div>
 
                     </form>
@@ -81,7 +81,7 @@
 
                                 <td>
                                     <a class="btn btn-warning" href="Controlador?menu=Cliente&accion=Editar&id=${cl.getId()}">Editar</a>
-                                    <a class="btn btn-danger" href="Controlador?menu=Cliente&accion=Delete&id=${cl.getId()}">Delete</a>
+                                    <a class="btn btn-danger" href="Controlador?menu=Cliente&accion=Delete&id=${cl.getId()}" style="margin-left: 10px">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
