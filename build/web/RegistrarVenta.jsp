@@ -59,7 +59,7 @@
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <input type="number" name="cantidad" value="1" class="form-control" min="1">
+                                    <input type="number" value="${cantidad}" name="cantidad" value="1" class="form-control" min="1">
                                 </div>  
                                 <div class="col-sm-3">
                                     <input type="text" name="stock" value="${producto.getStock()}"  class="form-control" placeholder="Stock">
@@ -68,6 +68,7 @@
                             <div class="form-group">
                                 <div class="col-sm">
                                     <input type="submit" name="accion" value="Agregar" class="btn btn-outline-info">
+                                    <input type="submit" name="accion" value="Actualizar" style="margin-left: 10px" class="btn btn-outline-success">
                                 </div>
                             </div>
                         </div>
@@ -104,8 +105,8 @@
                                     <td>${list.getCantidad()}</td>
                                     <td>${list.getSubtotal()}</td>
                                     <td class="d-flex">
-                                        <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pr.getId()}">Editar</a>
-                                        <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Delete&id=${pr.getId()}" style="margin-left: 10px">Delete</a>
+                                        <a class="btn btn-warning" href="Controlador?menu=NuevaVenta&accion=Editar&id=${list.getItem()}" >Editar</a>
+                                        <a class="btn btn-danger" href="Controlador?menu=NuevaVenta&accion=Delete&id=${list.getItem()}" style="margin-left: 10px">Delete</a>
                                     </td>
                                 </tr>
                                 </c:forEach>
@@ -126,8 +127,13 @@
                 </div>                
             </div>
         </div>
-        
+        <script>
+            function mostrarActualizar() {
+                // Muestra el botón "Actualizar"
+                document.getElementById('btnActualizar').style.display = 'inline-block';
+            }
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
     </body>
 </html>

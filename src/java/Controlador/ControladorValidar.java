@@ -77,7 +77,7 @@ public class ControladorValidar extends HttpServlet {
             System.out.println("Resultado de la consulta: " + em.getUser());
             
             if(em.getUser()!=null){
-                request.getSession().setAttribute("empleado", em);
+                request.getSession().setAttribute("empleadoActivo", em);
                 request.setAttribute("usuario", em);
                 request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
                
