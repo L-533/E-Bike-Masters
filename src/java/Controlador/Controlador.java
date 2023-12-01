@@ -73,6 +73,7 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
             
         }
+        
         if(menu.equals("Empleado")){
             switch(accion){
                 case "Listar":
@@ -263,6 +264,9 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("nSerie", numeroSerie);
                         request.setAttribute("lista", lista);
                         request.setAttribute("totalpagar", totalPagar);
+                        if(pr.getStock() != 0){
+                            request.setAttribute("producto", pr); 
+                        }
                         
                     } else {
                         // Cliente no encontrado, muestra la notificación en el lado del cliente
@@ -275,8 +279,11 @@ public class Controlador extends HttpServlet {
                     
                     pr = prdao.listarId(id);
                     request.setAttribute("nSerie", numeroSerie);
-                    request.setAttribute("clienteV", cl);                    
-                    request.setAttribute("producto", pr);
+                    request.setAttribute("clienteV", cl); 
+                    if(pr.getStock() != 0){
+                       request.setAttribute("producto", pr); 
+                    }
+                    
                     request.setAttribute("lista", lista);
                     request.setAttribute("totalpagar", totalPagar);
                     break;  
@@ -309,30 +316,53 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("lista", lista);
                     break;
                 case "GenerarVenta":
-                    //Guardar Venta
+                    
+                    boolean mensajeError;
+                    boolean mensajeExito;
+                    // Obtener el empleado activo
                     Empleado empleadoActivo = (Empleado) request.getSession().getAttribute("empleadoActivo");
-                    v.setIdCliente(cl.getId());
-                    v.setIdEmpleado(empleadoActivo.getId());
-                    v.setNumSerie(numeroSerie);
-                    v.setFecha(formateador.format(ahora));
-                    v.setMonto(totalPagar);
-                    v.setEstado("1");
-                    vdao.GuardarVenta(v);
-                    
-                    //Guardar Detalle Ventas
-                    int idv= Integer.parseInt(vdao.IdVentas());
-                    for(int i=0;i<lista.size();i++){
-                        v = new Venta();
-                        v.setId(idv);
-                        v.setIdProducto(lista.get(i).getIdProducto());
-                        v.setCantidad(lista.get(i).getCantidad());
-                        v.setPrecio(lista.get(i).getPrecio());
-                        vdao.GuardarDetalleVentas(v);
+
+                    // Validar que los valores clave no estén vacíos
+                    if (cl.getId() != 0 && empleadoActivo != null && numeroSerie != null && !numeroSerie.isEmpty() && formateador != null && ahora != null && lista.size() != 0) {
+                        // Crear la venta solo si los valores clave no están vacíos
+                        Venta v = new Venta();
+                        v.setIdCliente(cl.getId());
+                        v.setIdEmpleado(empleadoActivo.getId());
+                        v.setNumSerie(numeroSerie);
+                        v.setFecha(formateador.format(ahora));
+                        v.setMonto(totalPagar);
+                        v.setEstado("1");
+                        vdao.GuardarVenta(v);
+
+                        // Guardar Detalle Ventas
+                        int idv = Integer.parseInt(vdao.IdVentas());
+                        for (int i = 0; i < lista.size(); i++) {
+                            v = new Venta();
+                            v.setId(idv);
+                            v.setIdProducto(lista.get(i).getIdProducto());
+                            v.setCantidad(lista.get(i).getCantidad());
+                            v.setPrecio(lista.get(i).getPrecio());
+                            vdao.GuardarDetalleVentas(v);
+                        }
+                        
+                        mensajeExito=true;
+                        request.setAttribute("mensajeExito", mensajeExito);
+                        cl = new Cliente();   
+                        pr = new Producto();
+                        lista.clear(); // Reiniciar la lista después de generar la venta
+                        totalPagar = 0.0;
+                        item = 0;
+                        
+                    } else {
+                        // Manejar el caso donde algún valor está vacío
+                        pr= new Producto();
+                        cl = new Cliente();    
+                        lista.clear(); // Reiniciar la lista después de generar la venta
+                        System.out.println("Error: Alguno de los valores clave está vacío.");
+                        mensajeError=true;
+                        request.setAttribute("mensajeError", mensajeError);
+                        request.setAttribute("nSerie", numeroSerie);
                     }
-                    
-                    lista.clear(); // Reiniciar la lista después de generar la venta
-                    totalPagar = 0.0; 
-                    item=0;
                     break;
                     
                 case "Editar":                    
@@ -426,6 +456,11 @@ public class Controlador extends HttpServlet {
                     idVenta=0;
                     
                     break;
+                case "Cancelar":
+                    
+                     lista.clear(); // Reiniciar la lista 
+                     request.setAttribute("nSerie", numeroSerie);
+                    break;
                 default:
                     
                     numeroSerie = vdao.GenererarSerie();
@@ -446,6 +481,15 @@ public class Controlador extends HttpServlet {
                     
             }            
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
+        }
+        if(menu.equals("Logout")){
+            cl = new Cliente();   
+            pr = new Producto();
+            lista.clear(); // Reiniciar la lista después de generar la venta
+            totalPagar = 0.0;
+            item = 0;
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            
         }
 
     }

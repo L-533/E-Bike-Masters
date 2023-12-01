@@ -83,10 +83,15 @@ public class ControladorValidar extends HttpServlet {
                
             }else{
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                
             }
             
         }else{
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            System.out.println("Empleado cerro sesion");
+            request.getRequestDispatcher("Controlador?menu=Logout").forward(request, response);
+//            request.getRequestDispatcher("Controlador?menu=NuevaVenta&accion=Cancelar").forward(request, response);
+//            request.getRequestDispatcher("index.jsp").forward(request, response);
+            
         }
     }
 

@@ -19,6 +19,7 @@
     </head>           
     
     <body>
+        
         <div class="d-flex">
             <div class="col-sm-5">
                 <div class="card">
@@ -34,7 +35,7 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <input type="text" name="nombrescliente" value="${clienteV.getNom()}" class="form-control" placeholder="Datos Cliente">
+                                    <input type="text" name="nombrescliente" value="${clienteV.getNom()}" class="form-control" placeholder="Datos Cliente" readonly>
                                 </div>                     
 
                             </div>
@@ -44,25 +45,25 @@
                             </div>
                             <div class="form-group d-flex">
                                 <div class="col-sm-6 d-flex">
-                                    <input type="text" name="CodigoProducto" value="${producto.getId()}"  class="form-control" placeholder="Codigo" pattern="[0-9]+" title="Ingrese solo números">
+                                    <input type="text" name="CodigoProducto" value="${producto.getId()}"  class="form-control" placeholder="Codigo" pattern="[0-9]+" title="Ingrese solo números" >
                                     <input type="submit" name="accion" value="BuscarProducto" class="btn btn-outline-info ">
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <input type="text" name="NombreProducto" value="${producto.getNom()}" class="form-control" placeholder="Datos Producto">
+                                    <input type="text" name="NombreProducto" value="${producto.getNom()}" class="form-control" placeholder="Datos Producto" readonly>
                                 </div> 
                             </div>
                             <div class="form-group d-flex">
                                 <div class="col-sm-6 d-flex">
-                                    <input type="text" name="precio" value="${producto.getPrecio()}" class="form-control" placeholder="$/.0.00">
+                                    <input type="text" name="precio" value="${producto.getPrecio()}" class="form-control" placeholder="$/.0.00" pattern="\d+(\.\d{1,2})?" title="Ingrese un valor positivo con hasta dos decimales">
 
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <input type="number" value="${cantidad}" name="cantidad" value="1" class="form-control" min="1">
+                                    <input type="number" value="${cantidad}" name="cantidad" value="1" class="form-control" min="1" max="${producto.getStock()}">
                                 </div>  
                                 <div class="col-sm-3">
-                                    <input type="text" name="stock" value="${producto.getStock()}"  class="form-control" placeholder="Stock">
+                                    <input type="text" name="stock" value="${producto.getStock()}"  class="form-control" placeholder="Stock" readonly>
                                 </div> 
                             </div>
                             <div class="form-group">
@@ -116,8 +117,8 @@
                     <div class="card-footer d-flex">
                         <div class="col-sm-6">
                             <a href="Controlador?menu=NuevaVenta&accion=GenerarVenta" class="btn btn-success">Generar Venta</a>
+                            <a href="Controlador?menu=NuevaVenta&accion=Cancelar" class="btn btn-danger" style="margin-left: 10px">Cancelar</a>
                             
-                            <input type="submit" name="accion" value="Cancelar" class="btn btn-danger" style="margin-left: 10px">
                         </div>
                         <div class="d-flex col-sm-4 ml-auto">
                             <label>Total: </label>
@@ -125,12 +126,25 @@
                         </div>
                     </div>
                 </div>                
-            </div>
+            </div>            
+        </div>
+        <div   id="mensajeExito" style="display:none; color: green; margin-left: 20px;" >
+            La venta se ha enviado con éxito.
+        </div>
+        <div   id="mensajeError" style="display:none; color: red; margin-left: 20px;" >
+            ¡Error! No se pudo enviar la venta.
         </div>
         <script>
-            function mostrarActualizar() {
-                // Muestra el botón "Actualizar"
-                document.getElementById('btnActualizar').style.display = 'inline-block';
+            if(${mensajeError}== true){
+                document.getElementById('mensajeError').style.display = 'block';
+            }
+            
+           
+        </script>
+        
+        <script>
+             if(${mensajeExito}== true){
+                document.getElementById('mensajeExito').style.display = 'block';
             }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
