@@ -14,14 +14,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://kit.fontawesome.com/53b1bfb7db.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
         <link href="" rel="stylesheet" type="text/css"/>
         <title>Registrar Venta</title>
+        <style>
+            /*Imprimir comprobante*/
+
+        @media print{
+            .parte01, .btn, .accion{
+                display:none;
+            }
+}
+        </style>
     </head>           
     
     <body>
         
         <div class="d-flex">
-            <div class="col-sm-5">
+            <div class="col-sm-5 parte01">
                 <div class="card">
                     <form action="Controlador?menu=NuevaVenta" method="POST">
                         <div class="card-body">
@@ -93,7 +103,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Subtotal</th>
-                                    <th>Acciones</th>
+                                    <th class="accion">Acciones</th>
                                 </tr>
                             </thead> 
                             <tbody>
@@ -116,7 +126,7 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="col-sm-6">
-                            <a href="Controlador?menu=NuevaVenta&accion=GenerarVenta" class="btn btn-success">Generar Venta</a>
+                            <a href="Controlador?menu=NuevaVenta&accion=GenerarVenta" class="btn btn-success" >Generar Venta</a>
                             <a href="Controlador?menu=NuevaVenta&accion=Cancelar" class="btn btn-danger" style="margin-left: 10px">Cancelar</a>
                             
                         </div>
@@ -128,12 +138,13 @@
                 </div>                
             </div>            
         </div>
-        <div   id="mensajeExito" style="display:none; color: green; margin-left: 20px;" >
+        <div  class="accion" id="mensajeExito" style="display:none; color: green; margin-left: 20px;" >
             La venta se ha enviado con éxito.
         </div>
         <div   id="mensajeError" style="display:none; color: red; margin-left: 20px;" >
             ¡Error! No se pudo enviar la venta.
         </div>
+       
         <script>
             if(${mensajeError}== true){
                 document.getElementById('mensajeError').style.display = 'block';
@@ -147,6 +158,19 @@
                 document.getElementById('mensajeExito').style.display = 'block';
             }
         </script>
+        
+        <script>
+                  
+           
+            if (${ventaExito}) {
+                print();  // Llama a la función print() solo si la venta fue exitosa
+                setTimeout(function() {
+                    window.location.href = 'Controlador?menu=NuevaVenta&accion=ReiniciarLista';
+                }, 1000);
+            }
+            
+        </script>
+        
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
     </body>

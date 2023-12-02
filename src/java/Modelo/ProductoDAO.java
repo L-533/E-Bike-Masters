@@ -22,8 +22,23 @@ public class ProductoDAO {
     ResultSet rs;
     int r;
     
-    
-    
+       
+    public int actualizarStock(int id, int stock){
+        Producto pr= new Producto();
+        String sql="update producto set Stock = ? where idProducto = ?";
+        try{
+            con.setAutoCommit(false); // Habilitar el modo de autocommit            
+            ps=con.prepareStatement(sql);            
+            ps.setInt(1, stock);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            con.commit(); // Realizar el commit de la transacción
+            
+        }catch(Exception e){
+            
+        }
+        return r;
+    }
     //Operaciones CRUD
     
     public List listar(){
