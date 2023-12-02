@@ -80,8 +80,12 @@
 
 
                                 <td>
-                                    <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pr.getId()}">Editar</a>
-                                    <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Delete&id=${pr.getId()}" style="margin-left: 10px">Delete</a>
+                                    <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pr.getId()}" style="font-size:18px">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Delete&id=${pr.getId()}" style="margin-left: 10px; font-size:16px">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>

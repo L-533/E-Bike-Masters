@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://kit.fontawesome.com/53b1bfb7db.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+        <script src="https://kit.fontawesome.com/53b1bfb7db.js" crossorigin="anonymous"></script>
         <link href="" rel="stylesheet" type="text/css"/>
         <title>Registrar Venta</title>
         <style>
@@ -32,14 +32,18 @@
         
         <div class="d-flex">
             <div class="col-sm-5 parte01">
+                  <div class="d-flex justify-content-center pb-2">
+                        <img src="img/ventas-high-resolution-logo-black.png" alt="" style="width: 210px; height: 120px; margin: auto"/>
+                    </div>
                 <div class="card">
                     <form action="Controlador?menu=NuevaVenta" method="POST">
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Datos del Cliente</label>
+                                <i class="fa-solid fa-users"></i><label style="padding-left: 5px">Datos del Cliente</label>
                             </div>
                             <div class="form-group d-flex mb-4">
                                 <div class="col-sm-6 d-flex">
+                                    <span class="d-flex align-items-center justify-content-center" style="background-color: #ced4da; min-width: 25px; border-radius: 3px"><i class="fa-solid fa-barcode"></i></span>
                                     <input type="text" name="CodigoCliente" value="${clienteV.getCedula()}" class="form-control" placeholder="Codigo">
                                     <input type="submit" name="accion" value="BuscarCliente" class="btn btn-outline-info ">
                                 </div>
@@ -50,11 +54,11 @@
 
                             </div>
                             <div class="form-group">
-                                <label>Datos Producto</label>
-
+                               <i class="fa-solid fa-box"></i> <label style="padding-left: 5px;">Datos Producto</label>
                             </div>
                             <div class="form-group d-flex">
                                 <div class="col-sm-6 d-flex">
+                                    <span class="d-flex align-items-center justify-content-center" style="background-color: #ced4da; min-width: 25px; border-radius: 3px"><i class="fa-solid fa-barcode"></i></span>
                                     <input type="text" name="CodigoProducto" value="${producto.getId()}"  class="form-control" placeholder="Codigo" pattern="[0-9]+" title="Ingrese solo números" >
                                     <input type="submit" name="accion" value="BuscarProducto" class="btn btn-outline-info ">
                                 </div>
@@ -65,6 +69,7 @@
                             </div>
                             <div class="form-group d-flex">
                                 <div class="col-sm-6 d-flex">
+                                    <span class="d-flex align-items-center justify-content-center" style="background-color: #ced4da; min-width: 25px; border-radius: 3px"><i class="fa-solid fa-dollar-sign"></i></span>
                                     <input type="text" name="precio" value="${producto.getPrecio()}" class="form-control" placeholder="$/.0.00" pattern="\d+(\.\d{1,2})?" title="Ingrese un valor positivo con hasta dos decimales">
 
                                 </div>
@@ -86,16 +91,16 @@
                     </form>  
                 </div>
             </div> 
-            <div class="col-sm-7">
+            <div class="col-sm-7" style="margin-top: 128px;">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex col-sm-5 ml-auto">
-                            <label>Nro.Serie: </label>
-                            <input type="text" name="NroSerie" value="${nSerie}" class="form-control">
+                            <label style="line-height: 38px; margin: 0; padding-right: 5px">Nro.Serie: </label>
+                            <input type="text" name="NroSerie" value="${nSerie}" class="form-control" disabled style="text-align: center">
                         </div>
                         <br>
                         <table class="table table-hover">
-                            <thead>
+                            <thead style="background-color: cyan">
                                 <tr>
                                     <th>Nro</th>
                                     <th>Codigo</th>
@@ -116,8 +121,12 @@
                                     <td>${list.getCantidad()}</td>
                                     <td>${list.getSubtotal()}</td>
                                     <td class="d-flex">
-                                        <a class="btn btn-warning" href="Controlador?menu=NuevaVenta&accion=Editar&id=${list.getItem()}" >Editar</a>
-                                        <a class="btn btn-danger" href="Controlador?menu=NuevaVenta&accion=Delete&id=${list.getItem()}" style="margin-left: 10px">Delete</a>
+                                        <a class="btn btn-warning" href="Controlador?menu=NuevaVenta&accion=Editar&id=${list.getItem()}" style="font-size:18px">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a class="btn btn-danger" href="Controlador?menu=NuevaVenta&accion=Delete&id=${list.getItem()}" style="margin-left: 10px; font-size:18px">
+                                             <i class="fa-solid fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 </c:forEach>
@@ -126,12 +135,16 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="col-sm-6">
-                            <a href="Controlador?menu=NuevaVenta&accion=GenerarVenta" class="btn btn-success" >Generar Venta</a>
-                            <a href="Controlador?menu=NuevaVenta&accion=Cancelar" class="btn btn-danger" style="margin-left: 10px">Cancelar</a>
+                            <a href="Controlador?menu=NuevaVenta&accion=GenerarVenta" class="btn btn-success" >
+                                <i class="fa-solid fa-check" style="padding-right: 3px"></i>Generar Venta
+                            </a>
+                            <a href="Controlador?menu=NuevaVenta&accion=Cancelar" class="btn btn-danger" style="margin-left: 10px">
+                                <i class="fa-solid fa-ban" style="padding-right: 3px"></i>Cancelar
+                            </a>
                             
                         </div>
                         <div class="d-flex col-sm-4 ml-auto">
-                            <label>Total: </label>
+                            <label style="line-height: 38px; margin: 0; padding-right: 5px;">Total: </label>
                             <input type="text" name="txtTotal" value="$/. ${totalpagar}0" class="form-control">                            
                         </div>
                     </div>

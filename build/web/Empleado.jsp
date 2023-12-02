@@ -83,8 +83,12 @@
                             <td>${em.getEstado()}</td>
                             <td>${em.getUser()}</td>
                             <td>
-                                <a class="btn btn-warning" href="Controlador?menu=Empleado&accion=Editar&id=${em.getId()}">Editar</a>
-                                <a class="btn btn-danger" href="Controlador?menu=Empleado&accion=Delete&id=${em.getId()}" style="margin-left: 10px">Delete</a>
+                                <a class="btn btn-warning" href="Controlador?menu=Empleado&accion=Editar&id=${em.getId()}" style="font-size:18px">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="btn btn-danger" href="Controlador?menu=Empleado&accion=Delete&id=${em.getId()}" style="margin-left: 10px; font-size:16px">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>

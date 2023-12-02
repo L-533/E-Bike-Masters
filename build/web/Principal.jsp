@@ -13,24 +13,32 @@
         <title>E-Bike Masters</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+        <script src="https://kit.fontawesome.com/53b1bfb7db.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" id="#NavBrand">E-Bike Masters</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 90px;">
+            <a class="navbar-brand" id="#NavBrand">
+               <i class="fa-solid fa-bicycle"></i> E-Bike Masters
+            </a>
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav nav-active">
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navProducto" href="Controlador?menu=Producto&accion=Listar" target="myFrame">Producto</a>
+                    <a class="btn btn-outline-light" id="navProducto" href="Controlador?menu=Producto&accion=Listar" target="myFrame">
+                        <i class="fa-solid fa-box pe-2"></i>Producto
+                    </a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navEmpleado" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">Empleado</a>
+                    <a class="btn btn-outline-light" id="navEmpleado" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">
+                        <i class="fa-solid fa-users pe-2"></i>Empleados</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Clientes</a>
+                    <a class="btn btn-outline-light" id="navCliente" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">
+                        <i class="fa-solid fa-users pe-2"></i>Clientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?menu=NuevaVenta&accion=default" target="myFrame">Nueva Venta</a>
+                    <a class="btn btn-outline-light active" id="navNuevaVenta" href="Controlador?menu=NuevaVenta&accion=default" target="myFrame">
+                        <i class="fa-solid fa-money-bill pe-2"></i>Nueva Venta</a>
                   </li>                
                 </ul>
                 
@@ -40,7 +48,7 @@
 
             <div class="dropdown-center">
                 <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ${usuario.getNom()}
+                     <i class="fa-solid fa-user pe-2"></i> ${usuario.getNom()}
                 </button>
                 <ul class="dropdown-menu text-center " aria-labelledby="dropdownMenuButton1">
                     
